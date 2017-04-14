@@ -1,0 +1,22 @@
+﻿
+<style>
+
+</style>
+<Row style="padding:20px">
+    @for (var i = 0; i < 30; i++)
+    {
+        <i-col span="4" style="padding:20px">
+            <Card>
+                <p slot="title">标准卡片</p>
+                <p slot="extra"><a><Icon type="ios-cart"></Icon></a></p>
+                <div class="product-img">
+                    <img style="width:100%;height:100%" src="~/Content/images/pro0.jpg" />
+                </div>
+                <p><small>20RMB</small></p>
+            </Card>
+        </i-col>
+    }
+</Row>
+@section scripts{
+    <script src="~/Scripts/Biz/product.js"></script>
+}

@@ -1,0 +1,119 @@
+﻿@section styles{
+    <style>
+        .cart-body-center {
+            display: block;
+            width: 900px;
+            height:100%;
+            margin: 0 auto;
+        }
+
+        ul {
+            background-color: rgba(255, 255, 255,0.8);
+        }
+            ul li {
+                padding:20px;
+                height:80px;
+            }
+                ul li h4 {
+                    text-align:left;
+                }
+    .cart-footer {
+        width:100%;
+        height:80px;
+        position:fixed;
+        background-color:rgba(155,155,155,0.7);
+        bottom:0px;
+        font-size:20px;
+        color:#fff;
+    }
+    </style>
+}
+<div class="cart-body-center">
+    <ul>
+        <li>
+            <Row>
+                <i-col span="2" offset="1">
+                    <h4>选择</h4>
+                </i-col>
+                <i-col span="2" offset="1">
+                   <h4>图片</h4>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <h4>名称</h4>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <h4>类型</h4>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <h4>单价</h4>
+                </i-col>
+                <i-col span="4">
+                    <h4>数量</h4>
+                </i-col>
+                <i-col span="2">
+                    <h4>总价</h4>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <h4>操作</h4>
+                </i-col>
+            </Row>
+        </li>
+        <li v-for="(cart,index) in carts">
+            <Row>
+                <i-col span="2" offset="1">
+                    <Checkbox v-model="cart.selected"></Checkbox>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <img style="width:60px;height:60px" v-bind:src="cart.src" />
+                </i-col>
+                <i-col span="2" offset="1">
+                    <span>{{cart.name}}</span>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <span>
+                        {{cart.type}}
+                    </span>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <span>
+                        {{cart.price}}RMB
+                    </span>
+                </i-col>
+                <i-col span="4">
+                    <i-Button icon="ios-plus-empty" @@click="add(index)"></i-Button>
+                    <input type="text" style="width:30px" v-model="cart.num" readonly />
+                    <i-Button icon="ios-minus-empty" @@click="minus(index)"></i-Button>
+                </i-col>
+                <i-col span="2">
+                    <span>
+                        {{cart.total}}RMB
+                    </span>
+                </i-col>
+                <i-col span="2" offset="1">
+                    <i-Button icon="ios-minus-empty" type="error" @@click="del"></i-Button>
+                </i-col>
+            </Row>
+        </li>
+    </ul>
+</div>
+<div class="cart-footer">
+    <Row>
+        <i-col span="2" offset="4"> 
+            <Checkbox v-model="SelectedAll">全选</Checkbox>
+        </i-col>
+        <i-col span="4" offset="10">
+            <span>已选择</span><span>{{TotalNum}}</span><span>件商品</span>
+        </i-col>
+        <i-col span="2">
+            <span>总价:{{TotalPrice}}</span>
+        </i-col>
+        <i-col span="2">
+            <i-Button type="error" size="large" @@click="settlement" >去结算</i-Button>
+        </i-col>
+    </Row>
+</div>
+
+
+@section scripts{
+    <script src="~/Scripts/Biz/cart.js"></script>
+}
