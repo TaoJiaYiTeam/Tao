@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tao.Repository", "Tao.Repos
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tao.IRepository", "Tao.IRepository\Tao.IRepository.csproj", "{3B3263ED-59BA-48C5-9BB0-AAECF3DBB31A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBManager", "DBManager\DBManager.csproj", "{DA6C843C-9F84-4862-B06A-D6AAA0E042A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{3B3263ED-59BA-48C5-9BB0-AAECF3DBB31A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B3263ED-59BA-48C5-9BB0-AAECF3DBB31A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B3263ED-59BA-48C5-9BB0-AAECF3DBB31A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA6C843C-9F84-4862-B06A-D6AAA0E042A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA6C843C-9F84-4862-B06A-D6AAA0E042A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA6C843C-9F84-4862-B06A-D6AAA0E042A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA6C843C-9F84-4862-B06A-D6AAA0E042A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
