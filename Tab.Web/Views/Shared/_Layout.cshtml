@@ -5,8 +5,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @Styles.Render("~/Content/css")
     <!-- 引入样式 -->
     <link rel="stylesheet" href="~/Content/iview.css">
+
     <style>
         body, html, #app {
             height: 100%;
@@ -15,7 +17,7 @@
 
         .layout {
             border: 1px solid #d7dde4;
-            height:100%;
+            height: 100%;
             background: #fff;
             position: relative;
             border-radius: 4px;
@@ -28,7 +30,7 @@
         }
 
         .layout-copy {
-            display:block;
+            display: block;
             text-align: center;
             padding: 10px 0 20px;
             color: #9ea7b4;
@@ -74,20 +76,19 @@
             }
 
         .layout-body {
-            width:100%;
-            min-height:100%;
-            height:auto;
-            display:inline-block;
+            width: 100%;
+            min-height: 100%;
+            height: auto;
+            display: inline-block;
             background-image: url('../../Content/images/bg2.jpg');
-            background-size:100%;
-            background-repeat:repeat-x;
-            background-repeat:repeat-y;
+            background-size: 100%;
+            background-repeat: repeat-x;
+            background-repeat: repeat-y;
         }
     </style>
     @RenderSection("styles", required: false)
 </head>
 <body>
-
     <div id="app">
         <div class="layout">
             <div class="layout-header">
@@ -109,13 +110,17 @@
                                     <Icon type="settings"></Icon>
                                     我的订单
                                 </Menu-item>
-                              
-                                <Menu-item name="4">
 
+                                <Menu-item name="4">
                                     <Icon type="settings"></Icon>
-                                    <Badge count="3">
+                                    @if (ViewBag.PageName == "Product")
+                                    {
+                                        <a href="~/Home/Cart" style="height:40px">我的购物车<span class="badge">{{CartsNum}}</span>&nbsp;&nbsp;</a>
+                                    }
+                                    else
+                                    {
                                         <a href="~/Home/Cart" style="height:40px">我的购物车&nbsp;&nbsp;</a>
-                                    </Badge>
+                                    }
                                 </Menu-item>
 
                             </i-menu>
@@ -131,8 +136,8 @@
             </div>
         </div>
     </div>
-
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     <!-- 引入Vue -->
     <script src="~/Scripts/vue.min.js"></script>
     <!-- 引入组件库 -->

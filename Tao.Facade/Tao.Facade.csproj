@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{20CDFB2D-32E9-4EBA-AF53-A8EFF373F54F}</ProjectGuid>
+    <ProjectGuid>{BEF50D33-E5AB-4A4C-89C4-0F6D7CE3FAB8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tao.Application</RootNamespace>
-    <AssemblyName>Tao.Application</AssemblyName>
+    <RootNamespace>Tao.Facade</RootNamespace>
+    <AssemblyName>Tao.Facade</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,35 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\AppProfiles.cs" />
-    <Compile Include="AutoMapper\AutoMapperConfig.cs" />
-    <Compile Include="ProductApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Infrastructure\Tao.Infrastructure.csproj">
-      <Project>{e1ae7484-bd5f-4e93-bdee-eb8defcf16ca}</Project>
-      <Name>Tao.Infrastructure</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tao.Domain\Tao.Domain.csproj">
-      <Project>{6aadf7c2-18d8-4142-a920-a83ab356d8ab}</Project>
-      <Name>Tao.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tao.Facade\Tao.Facade.csproj">
-      <Project>{bef50d33-e5ab-4a4c-89c4-0f6d7ce3fab8}</Project>
-      <Name>Tao.Facade</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tao.IRepository\Tao.IRepository.csproj">
-      <Project>{3b3263ed-59ba-48c5-9bb0-aaecf3dbb31a}</Project>
-      <Name>Tao.IRepository</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tao.Repository\Tao.Repository.csproj">
-      <Project>{71794df8-778b-4f63-89f2-e04125c5b53d}</Project>
-      <Name>Tao.Repository</Name>
-    </ProjectReference>
+    <Compile Include="ViewModel\CartVm.cs" />
+    <Compile Include="ViewModel\ProductVm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

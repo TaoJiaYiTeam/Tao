@@ -50,8 +50,9 @@ namespace Tao.Repository
             using (var conn = DbClient.GetConnection())
             {
                 var model = Mapper.Map<TModel>(entity);
-                string sql = string.Format("delete from {0} where {1} = @{1}", _tableName, _keyName);
-                var result = conn.Execute(sql, model);
+                //string sql = string.Format("delete from {0} where {1} = @{1}", _tableName, _keyName);
+                var result=conn.Delete(model);
+                //var result = conn.Execute(sql, model);
                 return result >= 1 ? true : false;
             }
         }
@@ -81,7 +82,11 @@ namespace Tao.Repository
 
         public TAggregate FindOne(object key)
         {
-            throw new NotImplementedException();
+            using (var conn = DbClient.GetConnection())
+            {
+                var result = Mapper.Map<TAggregate>(conn.GetList<TModel>(key).FirstOrDefault());
+                return result;
+            }
         }
 
         public bool Insert(TAggregate entity)

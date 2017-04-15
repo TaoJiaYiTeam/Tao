@@ -13,6 +13,7 @@ namespace Tao.Repository
         public ModelProfiles()
         {
             CreateMap<ProductModel, Product>().ReverseMap();
+
         }
     }
 }

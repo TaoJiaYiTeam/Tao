@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Dapper;
 
-namespace Tao.Repository
+namespace Tao.Facade
 {
-    [Table("Product")]
-    public class ProductModel
+    public class ProductVm
     {
-        [Key]
         public string RowGuid { get; set; }
         public string Name { get; set; }
         public string SupplierId { get; set; }
@@ -24,6 +21,5 @@ namespace Tao.Repository
         public string Creator { get; set; }
         public DateTime UpdateTime { get; set; }
         public string Modifier { get; set; }
-        public int IsDel { get; set; }
     }
 }

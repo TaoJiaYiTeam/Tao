@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Tao.Domain;
+using Tao.Facade;
 
 namespace Tao.Application
 {
-    public class CoreProfiles:Profile
+    public class AppProfiles:Profile
     {
-        public CoreProfiles()
+        public AppProfiles()
         {
-
-
+            CreateMap<Product, ProductVm>().ReverseMap();
+            CreateMap<ProductVm, CartVm>().ReverseMap();
         }
     }
 }

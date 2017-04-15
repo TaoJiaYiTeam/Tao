@@ -216,6 +216,10 @@
       <Project>{20cdfb2d-32e9-4eba-af53-a8eff373f54f}</Project>
       <Name>Tao.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tao.Facade\Tao.Facade.csproj">
+      <Project>{bef50d33-e5ab-4a4c-89c4-0f6d7ce3fab8}</Project>
+      <Name>Tao.Facade</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tao.Repository\Tao.Repository.csproj">
       <Project>{71794df8-778b-4f63-89f2-e04125c5b53d}</Project>
       <Name>Tao.Repository</Name>

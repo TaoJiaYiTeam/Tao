@@ -20,7 +20,7 @@ namespace Apptest
             });
 
             IProductRepo _proRepo = new ProductRepo();
-            var result=_proRepo.Insert(new Product { RowGuid = Guid.NewGuid().ToString(), Name = "拉提" });
+            //var result=_proRepo.Insert(new Product { RowGuid = Guid.NewGuid().ToString(), Name = "拉提" });
         }
         public T EnCoding<T>(T entity)
         {

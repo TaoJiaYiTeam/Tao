@@ -61,36 +61,36 @@
         <li v-for="(cart,index) in carts">
             <Row>
                 <i-col span="2" offset="1">
-                    <Checkbox v-model="cart.selected"></Checkbox>
+                    <Checkbox v-model="cart.Selected"></Checkbox>
                 </i-col>
                 <i-col span="2" offset="1">
-                    <img style="width:60px;height:60px" v-bind:src="cart.src" />
+                    <img style="width:60px;height:60px" v-bind:src="cart.ImgUrl" />
                 </i-col>
                 <i-col span="2" offset="1">
-                    <span>{{cart.name}}</span>
+                    <span>{{cart.Name}}</span>
                 </i-col>
                 <i-col span="2" offset="1">
                     <span>
-                        {{cart.type}}
+                        {{cart.Category}}
                     </span>
                 </i-col>
                 <i-col span="2" offset="1">
                     <span>
-                        {{cart.price}}RMB
+                        {{cart.Price}}RMB
                     </span>
                 </i-col>
                 <i-col span="4">
                     <i-Button icon="ios-plus-empty" @@click="add(index)"></i-Button>
-                    <input type="text" style="width:30px" v-model="cart.num" readonly />
+                    <input type="text" style="width:30px" v-model="cart.Num" readonly />
                     <i-Button icon="ios-minus-empty" @@click="minus(index)"></i-Button>
                 </i-col>
                 <i-col span="2">
                     <span>
-                        {{cart.total}}RMB
+                        {{cart.Total}}RMB
                     </span>
                 </i-col>
                 <i-col span="2" offset="1">
-                    <i-Button icon="ios-minus-empty" type="error" @@click="del"></i-Button>
+                    <i-Button icon="ios-minus-empty" type="error" @@click="del(index)"></i-Button>
                 </i-col>
             </Row>
         </li>

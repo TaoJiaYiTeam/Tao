@@ -1,21 +1,28 @@
 ﻿
-<style>
+@{
+    ViewBag.PageName = "Product";
 
+}
+@section styles{
+<style>
+    .Pro-Stock {
+
+
+    }
 </style>
+}
 <Row style="padding:20px">
-    @for (var i = 0; i < 30; i++)
-    {
-        <i-col span="4" style="padding:20px">
+        <i-col v-for="pro in Products" span="4" style="padding:20px">
             <Card>
-                <p slot="title">标准卡片</p>
-                <p slot="extra"><a><Icon type="ios-cart"></Icon></a></p>
+                <p slot="title">{{pro.Name}}</p>
+                <p slot="extra"><a href="javascript:void(0);" @@click="addToCart(pro.RowGuid)"><Icon type="ios-cart"></Icon></a></p>
                 <div class="product-img">
-                    <img style="width:100%;height:100%" src="~/Content/images/pro0.jpg" />
+                    <img style="width:100%;height:100%" v-bind:src="pro.ImgUrl" />
                 </div>
-                <p><small>20RMB</small></p>
+                <p><small>{{pro.Price}}RMB</small></p>
+                <span class="Pro-Stock">销量：{{pro.Stock}}</span>
             </Card>
         </i-col>
-    }
 </Row>
 @section scripts{
     <script src="~/Scripts/Biz/product.js"></script>

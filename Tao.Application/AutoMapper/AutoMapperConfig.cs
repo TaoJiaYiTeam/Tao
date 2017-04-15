@@ -14,7 +14,7 @@ namespace Tao.Application
         {
             Mapper.Initialize(o =>
             {
-                o.AddProfile<CoreProfiles>();
+                o.AddProfile<AppProfiles>();
                 o.AddProfile<ModelProfiles>();
             });
         }

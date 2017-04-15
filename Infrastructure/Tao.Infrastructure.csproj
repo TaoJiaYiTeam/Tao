@@ -55,6 +55,7 @@
     <Compile Include="DbClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleCRUD.cs" />
+    <Compile Include="UniqueKeyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
