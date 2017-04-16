@@ -69,6 +69,7 @@
                         for (len; len--;) {
                             self.carts[len].Selected = newvalue;
                         }
+                        self.changeAllSelected(newvalue);
                     }
                 }
             },
@@ -123,7 +124,43 @@
                     self.carts.splice(index, 1);
                 },
                 settlement: function () {
+                    var self = this;
+                    if (self.TotalNum <= 0)
+                    {
+                        self.$Notice.warning({
+                            title: '请选择一个产品',
+                            desc:''
+                        });
+                        return;
+                    }
+
                     location.href = '/Home/Order';
+                },
+                changeSelected: function (index) {
+                    var self = this;
+                    $.ajax({
+                        url: '/Home/ChangeSelected',
+                        type: 'post',
+                        data: {
+                            RowGuid: self.carts[index].RowGuid
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                        }
+                    });
+                },
+                changeAllSelected: function (flag) {
+                    var self = this;
+                    $.ajax({
+                        url: '/Home/ChangeAllSelected',
+                        type: 'post',
+                        data: {
+                            status: flag
+                        },
+                        dataType: 'json',
+                        success: function (res) {
+                        }
+                    });
                 }
             }
         });

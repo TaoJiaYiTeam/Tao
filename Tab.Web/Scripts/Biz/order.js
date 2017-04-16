@@ -5,59 +5,87 @@
             data: {
                 percent: 10,
                 collapseValue: [1, 2, 3, 4, 5],
-                paytype: 'weixin',
-                columns1: [
+               
+                proColumns: [
                     {
                         title: '产品名称',
-                        key: 'name'
+                        key: 'Name'
                     },
                     {
                         title: '单价',
-                        key: 'age'
+                        key: 'Price'
                     },
                     {
                         title: '数量',
-                        key: 'address'
+                        key: 'Num'
                     },
                     {
                         title: '总价',
-                        key: 'total'
+                        key: 'Total'
                     }
                 ],
-                data1: [
-                    {
-                        name: '王小明',
-                        age: 18,
-                        address: '北京市朝阳区芍药居',
-                        total:10
-                    },
-                    {
-                        name: '张小刚',
-                        age: 25,
-                        address: '北京市海淀区西二旗',
-                        total: 10
-                    },
-                    {
-                        name: '李小红',
-                        age: 30,
-                        address: '上海市浦东新区世纪大道',
-                        total: 10
-                    },
-                    {
-                        name: '周小伟',
-                        age: 26,
-                        address: '深圳市南山区深南大道',
-                        total: 10
-                    }
-                ],
+                products: [],
+                totalPrice: 0,
+                provinceList: [{ value: '江苏', label: "江苏" }],
                 cityList: [{ value: '苏州', label: "苏州" }],
-                areaList: [{ value: '吴中区', label: "吴中区" },{ value: '园区', label: "园区" }]
+                areaList: [{ value: '吴中区', label: "吴中区" }, { value: '园区', label: "园区" }],
+                formValidate: {
+                    Province: '',
+                    City: '',
+                    Area: '',
+                    AddrDetail: '',
+                    Name: '',
+                    Phone: '',
+                    ICCard: '',
+                    Paytype: 'weixin',
+                },
+                ruleValidate: {
+                    Province: [
+                        { required: true, message: '省份不能为空', trigger: 'blur' }
+                    ],
+                    City: [
+                       { required: true, message: '城市不能为空', trigger: 'blur' }
+                    ],
+                    Area: [
+                        { required: true, message: '区域不能为空', trigger: 'blur' }
+                    ],
+                    AddrDetail: [
+                      { required: true, message: '详细地址不能为空', trigger: 'blur' }
+                    ],
+                    Name: [
+                      { required: true, message: '姓名不能为空', trigger: 'blur' }
+                    ],
+                    Phone: [
+                      { required: true, message: '手机号不能为空', trigger: 'blur' }
+                    ],
+                    ICCard: [
+                     { required: true, message: '身份证不能为空', trigger: 'blur' }
+                    ]
+                }
+            },
+            mounted: function () {
+                var self = this;
+                $.ajax({
+                    url: '/Home/GetSelectProduct',
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (res) {
+                        self.products = $.extend([], res.Products);
+                        self.totalPrice = res.TotalPrice;
+                    }
+                });
             },
             methods: {
-                add: function () { },
-                minus: function () { },
-                del: function () { }
-
+                createOrder: function (name) {
+                    var self = this;
+                    self.$refs[name].validate((valid) => {
+                        if (valid && self.products.length > 0) {
+                            this.$Message.success('提交成功!');
+                        } else {
+                            this.$Message.error('表单验证失败!');
+                        }
+                    })
+                }
             }
         });
     };

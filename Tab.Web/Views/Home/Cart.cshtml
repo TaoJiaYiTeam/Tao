@@ -61,7 +61,7 @@
         <li v-for="(cart,index) in carts">
             <Row>
                 <i-col span="2" offset="1">
-                    <Checkbox v-model="cart.Selected"></Checkbox>
+                    <Checkbox v-model="cart.Selected" @@on-change="changeSelected(index)"></Checkbox>
                 </i-col>
                 <i-col span="2" offset="1">
                     <img style="width:60px;height:60px" v-bind:src="cart.ImgUrl" />

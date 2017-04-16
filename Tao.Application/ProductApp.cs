@@ -28,5 +28,11 @@ namespace Tao.Application
             var result = Mapper.Map<IEnumerable<ProductVm>>(products);
             return result;
         }
+        public CartVm FindOne(string RowGuid)
+        {
+            var product=_productRepo.FindOne(new { RowGuid = RowGuid });
+            var productVm = Mapper.Map<ProductVm>(product);
+            return Mapper.Map<CartVm>(productVm);
+        }
     }
 }

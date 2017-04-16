@@ -57,19 +57,24 @@ namespace Tab.Web.Controllers
         [HttpPost]
         public JsonResult AddToCart(string RowGuid)
         {
-            var carts = Session["Cart"] as Dictionary<string,int>;
-            if (carts == null || !(carts is Dictionary<string, int>))
+            var carts = Session["Cart"] as Dictionary<string,CartVm>;
+            if (carts == null || !(carts is Dictionary<string, CartVm>))
             {
-                carts = new Dictionary<string, int>();
+                carts = new Dictionary<string, CartVm>();
             }
             if (carts.ContainsKey(RowGuid))
             {
-                var cartNum = carts[RowGuid];
+                var cartNum = carts[RowGuid].Num;
                 cartNum++;
-                carts[RowGuid] = cartNum;
+                carts[RowGuid].Num = cartNum;
             }
             else {
-                carts.Add(RowGuid, 1);
+                var product = _productApp.FindOne(RowGuid);
+                if (product != null)
+                {
+                    product.Total = product.Num * product.Price;
+                    carts.Add(RowGuid, product);
+                }
             }
             Session["Cart"] = carts;
 
@@ -88,33 +93,64 @@ namespace Tab.Web.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         [HttpPost]
+        public JsonResult ChangeSelected(string RowGuid)
+        {
+            var carts = Session["Cart"] as Dictionary<string, CartVm>;
+            if (carts == null)
+            {
+                return Json(new { Flag = true });
+            }
+            carts[RowGuid].Selected = !carts[RowGuid].Selected;
+            Session["Cart"] = carts;
+            return Json(new { Flag = true });
+        }
+
+        [HttpPost]
+        public JsonResult ChangeAllSelected(bool status)
+        {
+            var carts = Session["Cart"] as Dictionary<string, CartVm>;
+            if (carts == null)
+            {
+                return Json(new { Flag = true });
+            }
+            foreach (var item in carts.Values)
+            {
+                item.Selected = status;
+            }
+            Session["Cart"] = carts;
+            return Json(new { Flag = true });
+        }
+
+        [HttpPost]
         public JsonResult AddNum(string RowGuid)
         {
-            var carts = Session["Cart"] as Dictionary<string, int>;
+            var carts = Session["Cart"] as Dictionary<string, CartVm>;
             if (carts == null)
             {
                 return Json(new { Flag=true});
             }
-            carts[RowGuid]++;
+            carts[RowGuid].Num++;
+            carts[RowGuid].Total = carts[RowGuid].Price * carts[RowGuid].Num;
             Session["Cart"] = carts;
             return Json(new { Flag = true });
         }
         [HttpPost]
         public JsonResult MinusNum(string RowGuid)
         {
-            var carts = Session["Cart"] as Dictionary<string, int>;
+            var carts = Session["Cart"] as Dictionary<string, CartVm>;
             if (carts == null)
             {
                 return Json(new { Flag = true });
             }
-            carts[RowGuid]--;
+            carts[RowGuid].Num--;
+            carts[RowGuid].Total = carts[RowGuid].Price * carts[RowGuid].Num;
             Session["Cart"] = carts;
             return Json(new { Flag = true });
         }
         [HttpPost]
         public JsonResult DeleteCart(string RowGuid)
         {
-            var carts = Session["Cart"] as Dictionary<string, int>;
+            var carts = Session["Cart"] as Dictionary<string, CartVm>;
             if (carts == null)
             {
                 return Json(new { Flag = true });
@@ -124,31 +160,48 @@ namespace Tab.Web.Controllers
             return Json(new { Flag = true });
         }
         private IEnumerable<CartVm> getCarts() {
-            var carts = Session["Cart"] as Dictionary<string,int>;
+            var carts = Session["Cart"] as Dictionary<string,CartVm>;
             if (carts == null)
             {
                 return default(IEnumerable<CartVm>);
             }
-            var keys = new List<string>();
-            foreach (var item in carts.Keys)
-            {
-                keys.Add(item);
-            }
 
-            var cartVms =Mapper.Map<IEnumerable<CartVm>>(_productApp.GetAll(keys));
-            foreach (var item in cartVms)
+            var cartVms = new List<CartVm>();
+            foreach (var item in carts.Values)
             {
-                item.Num = carts[item.RowGuid];
-                item.Total = item.Price * item.Num;
+              
+                cartVms.Add(item);
             }
             return cartVms;
         }
         #endregion
 
+
+        #region Order
         public ActionResult Order()
         {
 
             return View();
         }
+        [HttpGet]
+        public JsonResult GetSelectProduct()
+        {
+            var carts = Session["Cart"] as Dictionary<string, CartVm>;
+            if (carts == null)
+            {
+                return Json(default(IEnumerable<CartVm>),JsonRequestBehavior.AllowGet);
+            }
+            var cartVms =new List<CartVm>();
+            foreach (var item in carts.Values)
+            {
+                if (item.Selected)
+                {
+                    cartVms.Add(item);
+                }
+            }
+            return Json(new { Products = cartVms , TotalPrice =cartVms.Sum(o=>o.Total)} , JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+
     }
 }
