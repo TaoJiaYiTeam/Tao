@@ -36,27 +36,27 @@ namespace Tab.Web.Controllers
         [HttpGet]
         public JsonResult InitInfo()
         {
-
             var result = new
             {
                 Products = getProducts(),
-                CartsNum = Session["Cart"] != null ? getCartNum(Session["Cart"] as Dictionary<string, int>) : Session["Cart"]
+                CartsNum = Session["Cart"] != null ? getCartNum(Session["Cart"] as Dictionary<string, CartVm>) : Session["Cart"]
             };
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public int getCartNum(Dictionary<string, int> carts)
+        public int getCartNum(Dictionary<string, CartVm> carts)
         {
             var num = 0;
             foreach (var item in carts.Values)
             {
-                num += item;
+                num += item.Num;
             }
             return num;
         }
         [HttpPost]
         public JsonResult AddToCart(string RowGuid)
         {
+            //建立session缓存 Cookie
             var carts = Session["Cart"] as Dictionary<string,CartVm>;
             if (carts == null || !(carts is Dictionary<string, CartVm>))
             {
@@ -64,14 +64,18 @@ namespace Tab.Web.Controllers
             }
             if (carts.ContainsKey(RowGuid))
             {
+                //存在则只加数量
                 var cartNum = carts[RowGuid].Num;
                 cartNum++;
                 carts[RowGuid].Num = cartNum;
+                carts[RowGuid].Total = carts[RowGuid].Num * carts[RowGuid].Price;
             }
             else {
+                //从数据库拿产品数据
                 var product = _productApp.FindOne(RowGuid);
                 if (product != null)
                 {
+                    product.Num = 1;
                     product.Total = product.Num * product.Price;
                     carts.Add(RowGuid, product);
                 }
@@ -203,5 +207,9 @@ namespace Tab.Web.Controllers
         }
         #endregion
 
+
+
+
+       
     }
 }
