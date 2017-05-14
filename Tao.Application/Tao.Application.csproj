@@ -44,10 +44,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminApp.cs" />
     <Compile Include="AutoMapper\AppProfiles.cs" />
     <Compile Include="AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="ProductApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserApp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

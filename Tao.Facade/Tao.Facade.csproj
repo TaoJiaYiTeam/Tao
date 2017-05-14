@@ -42,7 +42,11 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CartVm.cs" />
+    <Compile Include="ViewModel\MenuVm.cs" />
     <Compile Include="ViewModel\ProductVm.cs" />
+    <Compile Include="ViewModel\RoleVm.cs" />
+    <Compile Include="ViewModel\UserSearchVm.cs" />
+    <Compile Include="ViewModel\UserVm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

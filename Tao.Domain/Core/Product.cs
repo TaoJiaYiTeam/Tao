@@ -55,5 +55,10 @@ namespace Tao.Domain
             };
             return product;
         }
+
+        public void Delete()
+        {
+            IsDel = 1;
+        }
     }
 }

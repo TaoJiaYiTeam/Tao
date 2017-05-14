@@ -41,7 +41,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository\IBaseRepository.cs" />
+    <Compile Include="IRepository\IMenuRepo.cs" />
     <Compile Include="IRepository\IProductRepo.cs" />
+    <Compile Include="IRepository\IRoleRepo.cs" />
+    <Compile Include="IRepository\IRRoleMenuRepo.cs" />
+    <Compile Include="IRepository\IRUserRoleRepo.cs" />
+    <Compile Include="IRepository\IUserRepo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

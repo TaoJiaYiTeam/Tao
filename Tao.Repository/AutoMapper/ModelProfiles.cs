@@ -14,6 +14,13 @@ namespace Tao.Repository
         {
             CreateMap<ProductModel, Product>().ReverseMap();
 
+
+            CreateMap<UserModel, User>().ReverseMap();
+            CreateMap<RUserRoleModel, RUserRole>().ReverseMap();
+            CreateMap<RoleModel, Role>().ReverseMap();
+
+            CreateMap<RRoleMenuModel, RRoleMenu>().ReverseMap();
+            CreateMap<MenuModel, Menu>().ReverseMap();
         }
     }
 }

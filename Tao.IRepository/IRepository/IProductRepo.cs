@@ -9,6 +9,6 @@ namespace Tao.IRepository
 {
     public interface IProductRepo: IBaseRepository<Product>
     {
-
+        IEnumerable<Product> GetList(UserSearch search,string SupplierName ,out int total);
     }
 }

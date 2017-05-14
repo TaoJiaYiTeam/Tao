@@ -15,6 +15,12 @@ namespace Tao.Application
         {
             CreateMap<Product, ProductVm>().ReverseMap();
             CreateMap<ProductVm, CartVm>().ReverseMap();
+
+            CreateMap<User, UserVm>().ReverseMap();
+            CreateMap<Role, RoleVm>().ReverseMap();
+            CreateMap<Menu, MenuVm>().ReverseMap();
+
+            CreateMap<UserSearch, UserSearchVm>().ReverseMap();
         }
     }
 }
